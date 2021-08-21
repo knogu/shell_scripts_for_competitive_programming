@@ -1,4 +1,6 @@
-filename=${1:-main.py}
-sed -i -e "s/\(^[ ]*\)mt(\([^'\"]*\))/\1mt('\2', \2)/g" $filename $filename
-sed -i -e "s/#[ #]*from icecream import ic/from icecream import ic/g" $filename $filename
-python $filename
+file=${1:-main.py}
+sed -i -e "s/\(^[ ]*\)db/\1# db/g" $file $file
+sed -i -e "s/\(^[ ]*\)ic/\1# ic/g" $file $file
+sed -i -e "s/^\(from icecream import ic\)/# \1/g" $file $file
+sed -i -e "s/\(^[ ]*\)dump/\1\/\/ dump/g" $file $file
+python $file > out && cat out
